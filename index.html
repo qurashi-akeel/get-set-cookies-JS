@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <div>
+            <button onclick="setPrompt('cookie1')">Set Cookie 1</button>
+            <button onclick="getAlert('cookie1')">Get Cookie 1</button>
+            <button onclick="del('cookie1')">Delete Cookie 1</button>
+        </div>
+        <div>
+            <button onclick="setPrompt('cookie2')">Set Cookie 2</button>
+            <button onclick="getAlert('cookie2')">Get Cookie 2</button>
+            <button onclick="del('cookie2')">Delete Cookie 2</button>
+        </div>
+        <button onclick="displayAll()">Display All Cookies</button>
+        <script>
+            function setPrompt(key) {
+                let value = prompt("Value: ")
+                document.cookie = `${key}=${value}`
+            }
+            function getAlert(key) {
+                let cookies = document.cookie.split(';');
+                for(let cookie of cookies){
+                    let [k,v] = cookie.split('=');
+                    k = k.trim();
+                    v = v.trim();
+                    if(k===key){
+                         window.alert(v);
+                         break;
+                    }
+                }
+            }
+            function del(key){
+                document.cookie = `${key}=;max-age=0`
+            }
+            function displayAll(){
+                window.alert(document.cookie)
+            }
+        </script>   
+    </body>
+</html>
